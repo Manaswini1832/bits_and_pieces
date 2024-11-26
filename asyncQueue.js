@@ -11,7 +11,7 @@ function taskFunction(task){
   //there's an inner promise from setTimeout which resolves after a timeout of task*1000ms
   //After resolution of setTimeout, the log is printed and resolve() is called, which resolves the outer promise sent by taskFunction to its caller
 	return new Promise(resolve => setTimeout(() => {
-	    console.log(`Finished task${task}`);//executes after setTimeout finishes waiting
+	    if(task) console.log(`Finished task${task}`);//executes after setTimeout finishes waiting
 	    resolve();//executes at the end to make sure the promise of taskFunction is resolved
 	}, task*1000));//simulate working on task by waiting for 6s
 }
@@ -34,7 +34,7 @@ async function implementParallelTasks(tasks, maxParallelRequests, taskFn){
 
 tasks = [1,2,3,4,5,6,7,8,9];
 console.log(`There are ${tasks.length} tasks to finish`)
-implementParallelTasks(tasks, 3, taskFunction)
+implementParallelTasks(tasks, 7, taskFunction)
 
 /*
 OUTPUT PRINTS : 
